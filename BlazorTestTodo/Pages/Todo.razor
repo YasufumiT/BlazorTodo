@@ -1,0 +1,47 @@
+﻿@page "/todo"
+
+<h3>Todo @todoItems.Count(todoItems => !todoItems.IsDone)</h3>
+<br>
+<input placeholder="what do you want?"  @bind="newTodo" />
+<button @onclick="AddTodo">Add Todo</button>
+<button @onclick="ClearTodo">クリア</button>
+<br>
+<br>
+<h5>▽Todoが表示されます▽</h5>
+<ul>
+    @foreach (var todos in todoItems)
+    {
+        <li>
+            <h7>@dateTime</h7>
+            <br>
+            <input type = "checkbox" @bind = "todos.IsDone" />
+            <input @bind = "todos.Title"/>
+        </li>
+    }
+</ul>
+
+@code {
+    private List<TodoItem> todoItems = new List<TodoItem>();
+    private string newTodo;
+    public string dateTime = DateTime.Now.ToString("yyyy/MM/dd");
+
+    void AddTodo() {
+        Console.WriteLine("push");
+        if (!string.IsNullOrWhiteSpace(newTodo)) {
+            todoItems.Add(new TodoItem { Title = newTodo });
+            newTodo = string.Empty;
+        }
+    }
+
+    void ClearTodo() {
+        todoItems.Clear();
+    }
+
+    @*void DeleteTodoItem() {
+        for (int i = todoItems.Count - 1; i >= 0; i--)
+        {
+            todoItems.RemoveAt(i);
+        }
+
+    }*@
+}
