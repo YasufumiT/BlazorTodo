@@ -6,6 +6,7 @@ namespace BlazorTestTodo
     {
         public string Title { get; set; }
         public bool IsDone { get; set; }
+        public bool IsDelete { get; set; }
 
         public TodoItem()
         {
